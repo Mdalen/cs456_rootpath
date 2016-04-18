@@ -1,0 +1,13 @@
+Rootpath use guide:
+
+the included Makefile should handle the compilation of the module, and all you will need to do is then use insmod to install it
+when installed, the module will create a file in the /proc file system called /proc/getroot
+if this file is read, it will immediately give whatever program that is running it complete root access
+
+the included test file should show how it is done:
+first, we open the file and read from it
+this gives the test program root access
+we then use the system () function to exec the dash shell on this system from this process
+it then inherits all of the permissions of the previous program, essentially giving us a shell with root permissions
+
+in short, to use this, open and read the file in a program, and then use execve or other methods to change the process to a shell and you wil have root access
